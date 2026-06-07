@@ -1,0 +1,32 @@
+# Compiled binaries
+*.exe
+*.out
+*.o
+*.a
+*.so
+*.dll
+
+# Binary result/output files
+*.bin
+*.dat
+*.raw
+
+# Build directories
+build/
+bin/
+obj/
+
+# Debugging
+*.dSYM/
+*.su
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+Thumbs.db
+.DS_Store
