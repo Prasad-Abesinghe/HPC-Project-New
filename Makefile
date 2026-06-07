@@ -3,6 +3,7 @@
 #   make all        — build everything (requires GCC, OpenMPI)
 #   make serial     — build serial only
 #   make openmp     — build OpenMP only
+#   make pthreads   — build Pthreads only
 #   make mpi        — build MPI only
 #   make hybrid     — build hybrid MPI+OpenMP
 #   make rmse       — build RMSE tool
@@ -13,9 +14,9 @@ MPICC   = mpicc
 CFLAGS  = -O2 -Wall
 OMP_FLAGS = -fopenmp
 
-.PHONY: all serial openmp mpi hybrid rmse clean
+.PHONY: all serial openmp pthreads mpi hybrid rmse clean
 
-all: serial openmp mpi hybrid rmse
+all: serial openmp pthreads mpi hybrid rmse
 
 serial:
 	$(CC) $(CFLAGS) -o serial 1_serial.c -lm
@@ -24,6 +25,10 @@ serial:
 openmp:
 	$(CC) $(CFLAGS) $(OMP_FLAGS) -o openmp 2_openmp.c -lm
 	@echo "Built: openmp"
+
+pthreads:
+	$(CC) $(CFLAGS) -o pthreads 2b_pthreads.c -lm -lpthread
+	@echo "Built: pthreads"
 
 mpi:
 	$(MPICC) $(CFLAGS) -o mpi_heat 3_mpi.c -lm
@@ -38,7 +43,7 @@ rmse:
 	@echo "Built: rmse"
 
 clean:
-	rm -f serial openmp mpi_heat hybrid rmse *.bin
+	rm -f serial openmp pthreads mpi_heat hybrid rmse *.bin
 	@echo "Cleaned."
 
 # --- Quick timing runs ---
